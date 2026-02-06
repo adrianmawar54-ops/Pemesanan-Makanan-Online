@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Food Delivery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="checkout-style.css">
+</head>
+<body>
+
+    <div id="toast-container"></div>
+
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="logo-box"><i class="fa-solid fa-store"></i></div>
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-house"></i></a>
+                <a href="#" class="nav-item active">
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-bookmark"></i>
+                        <span id="cart-badge" class="badge hidden">0</span>
+                    </div>
+                </a>
+                <a href="promo.html" class="nav-item"><i class="fa-regular fa-compass"></i></a>
+                <a href="settings.html" class="nav-item"><i class="fa-solid fa-gear"></i></a>
+            </nav>
+            <div class="logout-box"><a href="login.html"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></div>
+        </aside>
+
+        <main class="main-content">
+            
+            <header class="header-floating">
+                <div class="header-content">
+                    <h1>Pesanan Kamu 😋</h1>
+                    <p>Cek kembali menu pilihanmu.</p>
+                </div>
+            </header>
+
+            <section class="checkout-section">
+                <div class="section-header">
+                    <i class="fa-solid fa-cart-shopping"></i> Item di Keranjang
+                </div>
+                <div class="food-grid" id="main-order-grid"></div>
+            </section>
+
+            <div class="thick-divider"></div>
+
+            <section class="checkout-section">
+                <div class="section-header">
+                    <i class="fa-solid fa-fire"></i> Sering Dipesan Bersama
+                </div>
+                <div class="food-grid" id="recommendation-grid"></div>
+            </section>
+        </main>
+
+        <aside class="right-sidebar">
+            <h2>Ringkasan Pembayaran</h2>
+            
+            <div class="delivery-toggle">
+                <button class="toggle-btn active" onclick="setDeliveryType(this, 'delivery')">Delivery</button>
+                <button class="toggle-btn" onclick="setDeliveryType(this, 'pickup')">Take Away</button>
+            </div>
+
+            <div class="list-header"><span>Item Details</span></div>
+            
+            <div id="cart-list-container" class="cart-list"></div>
+            
+            <div class="voucher-section">
+                <label><i class="fa-solid fa-ticket"></i> Voucher Diskon</label>
+                <select id="voucherSelect" onchange="applyVoucher()">
+                    <option value="0">Pilih Voucher Hemat...</option>
+                    <option value="10000">HEMAT10K (Potongan 10rb)</option>
+                    <option value="25000">SUPER25 (Potongan 25rb)</option>
+                    <option value="50000">GAJIAN50 (Potongan 50rb)</option>
+                </select>
+            </div>
+
+            <div class="payment-footer">
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="subtotal-display">0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Ongkir</span>
+                    <span id="ongkir-display">10.000</span>
+                </div>
+                <div class="summary-row discount-row hidden" id="disc-row">
+                    <span>Diskon</span>
+                    <span id="discount-display">-0</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total Bayar</span>
+                    <span id="total-display">0</span>
+                </div>
+                <button class="checkout-btn" onclick="openPaymentModal()">Pilih Pembayaran</button>
+            </div>
+        </aside>
+    </div>
+
+    <div id="paymentModal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <h3>Pilih Metode Pembayaran</h3>
+            <div class="payment-options">
+                <div class="pay-option" onclick="selectPayment(this)">
+                    <i class="fa-solid fa-wallet" style="color:#008CFF;"></i><span>E-Wallet (Dana/OVO)</span>
+                </div>
+                <div class="pay-option" onclick="selectPayment(this)">
+                    <i class="fa-solid fa-building-columns" style="color:#FF5722;"></i><span>Bank Transfer</span>
+                </div>
+                <div class="pay-option" onclick="selectPayment(this)">
+                    <i class="fa-solid fa-money-bill-wave" style="color:#4CAF50;"></i><span>Cash on Delivery</span>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeModal('paymentModal')">Batal</button>
+                <button class="btn-confirm" onclick="processTransaction()">Bayar Sekarang</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="trackingScreen" class="tracking-overlay hidden">
+        <div class="tracking-dashboard">
+            <div class="track-top-bar">
+                <div>
+                    <h2><i class="fa-solid fa-map-location-dot"></i> Live Tracking</h2>
+                    <p id="track-status-text">Pesananmu sedang dalam perjalanan...</p>
+                </div>
+                <div class="est-time"><small>Estimasi Tiba</small><h3>12:45 PM</h3></div>
+            </div>
+            <div class="track-content-row">
+                <div class="track-map-area">
+                    <div class="map-bg">
+                        <div class="route-line"></div>
+                        <div class="map-marker shop"><div class="pulse-ring shop-pulse"></div><i class="fa-solid fa-shop"></i></div>
+                        <div class="map-marker driver"><i class="fa-solid fa-motorcycle"></i><div class="driver-tooltip">Budi is here!</div></div>
+                        <div class="map-marker home"><div class="pulse-ring home-pulse"></div><i class="fa-solid fa-house-chimney"></i></div>
+                    </div>
+                </div>
+                <div class="track-sidebar-panel">
+                    <div class="driver-profile">
+                        <img src="https://img.freepik.com/free-photo/young-delivery-man-red-uniform_1258-26815.jpg" alt="Driver">
+                        <div><h4>Budi Santoso</h4><span><i class="fa-solid fa-star"></i> 4.9 • Plat B 1234 XYZ</span></div>
+                        <div class="action-icons"><button><i class="fa-solid fa-phone"></i></button><button><i class="fa-solid fa-message"></i></button></div>
+                    </div>
+                    <div class="status-timeline">
+                        <div class="status-item active" id="track-step-1">
+                            <div class="status-icon"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="status-text"><h5>Pesanan Disiapkan</h5><small>Dapur sedang memasak.</small></div>
+                            <div class="time">12:10</div>
+                        </div>
+                        <div class="status-item" id="track-step-2">
+                            <div class="status-icon"><i class="fa-solid fa-motorcycle"></i></div>
+                            <div class="status-text"><h5>Driver Menuju Resto</h5><small>Mengambil pesanan.</small></div>
+                            <div class="time">--:--</div>
+                        </div>
+                        <div class="status-item" id="track-step-3">
+                            <div class="status-icon"><i class="fa-solid fa-box-open"></i></div>
+                            <div class="status-text"><h5>Pesanan Diantar</h5><small>Menuju lokasimu.</small></div>
+                            <div class="time">--:--</div>
+                        </div>
+                        <div class="status-item" id="track-step-4">
+                            <div class="status-icon"><i class="fa-solid fa-flag-checkered"></i></div>
+                            <div class="status-text"><h5>Pesanan Sampai</h5><small>Selamat menikmati!</small></div>
+                            <div class="time">--:--</div>
+                        </div>
+                    </div>
+                    <button id="btn-finish-order" class="btn-finish-large hidden" onclick="openRatingModal()">Pesanan Diterima <i class="fa-solid fa-circle-check"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ratingModal" class="modal-overlay hidden">
+        <div class="modal-box rating-box">
+            <div class="rating-header"><h3>Beri Nilai Pesanan</h3><p>Bagaimana makanan dan layanannya?</p></div>
+            <div class="rating-body">
+                <div class="rating-group">
+                    <div class="target-info"><i class="fa-solid fa-shop"></i> <span>Kualitas Makanan</span></div>
+                    <div class="stars" id="storeStars">
+                        <i class="fa-regular fa-star" onclick="rate(1, 'store')"></i><i class="fa-regular fa-star" onclick="rate(2, 'store')"></i><i class="fa-regular fa-star" onclick="rate(3, 'store')"></i><i class="fa-regular fa-star" onclick="rate(4, 'store')"></i><i class="fa-regular fa-star" onclick="rate(5, 'store')"></i>
+                    </div>
+                </div>
+                <div class="rating-group">
+                    <div class="target-info"><i class="fa-solid fa-motorcycle"></i> <span>Layanan Driver</span></div>
+                    <div class="stars" id="driverStars">
+                        <i class="fa-regular fa-star" onclick="rate(1, 'driver')"></i><i class="fa-regular fa-star" onclick="rate(2, 'driver')"></i><i class="fa-regular fa-star" onclick="rate(3, 'driver')"></i><i class="fa-regular fa-star" onclick="rate(4, 'driver')"></i><i class="fa-regular fa-star" onclick="rate(5, 'driver')"></i>
+                    </div>
+                </div>
+                <textarea placeholder="Tulis ulasanmu disini (opsional)..."></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-skip" onclick="finishAndRedirect()">Lewati</button>
+                <button class="btn-submit" onclick="finishAndRedirect()">Kirim Ulasan</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="checkout-script.js"></script>
+</body>
+</html>

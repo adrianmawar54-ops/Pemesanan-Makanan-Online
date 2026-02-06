@@ -1,0 +1,200 @@
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+
+.login-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- BAGIAN KIRI (Form) --- */
+.left-section {
+    width: 50%; /* Porsi Kiri */
+    background: linear-gradient(to bottom, #FFF8E1, #FFFFFF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* --- BAGIAN KANAN (Gambar + Gradien) --- */
+.right-section {
+    width: 50%; /* Porsi Kanan */
+    
+    /* INI GRADIEN WARNA KUNING (Sesuai Permintaan) */
+    background: linear-gradient(to bottom, #FFC300 50%, #eceff1 100%);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efek cahaya halus di belakang gambar */
+.right-section::before {
+    content: ''; position: absolute;
+    width: 120%; height: 120%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 60%);
+    top: -10%; left: -10%; z-index: 1;
+}
+
+/* --- KARTU LOGIN --- */
+.login-card {
+    background: rgba(255, 255, 255, 0);
+    padding: 40px 50px;
+    width: 100%;
+    max-width: 450px;
+    border-radius: 30px;
+    /* Shadow profesional */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.10);
+    transition: transform 0.3s ease;
+}
+
+.logo-area {
+    color: #FFC107; font-weight: 600; font-size: 0.9rem;
+    margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;
+}
+
+h1 {
+    font-size: 2.2rem; color: #1a1a1a; margin-bottom: 5px; font-weight: 700;
+}
+.subtitle {
+    color: #888; margin-bottom: 25px; font-size: 0.9rem;
+}
+
+/* --- INPUT FIELDS --- */
+.input-group {
+    margin-bottom: 20px;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.input-group label {
+    display: block; margin-bottom: 8px;
+    font-size: 0.9rem; color: #555; font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid transparent;
+    background-color: #FFFFFF; /* Warna input abu muda */
+    border-radius: 25px; /* Sudut melengkung */
+    outline: none;
+    font-size: 0.95rem; color: #333;
+    transition: all 0.3s;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.input-group input:focus {
+    background-color: #fff;
+    border-color: #FFC107;
+    box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.15);
+}
+
+.password-wrapper { position: relative; }
+.password-wrapper input { padding-right: 45px; }
+
+.toggle-pass {
+    position: absolute; right: 15px; top: 50%;
+    transform: translateY(-50%);
+    color: #bbb; cursor: pointer; font-size: 1.1rem;
+    transition: 0.3s;
+}
+.toggle-pass:hover { color: #FFC107; }
+
+/* --- ACTIONS --- */
+.form-actions {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 25px; font-size: 0.85rem; color: #666;
+}
+
+.forgot-link {
+    color: #FFC107; text-decoration: none; font-weight: 600;
+    margin-left: auto; transition: 0.3s;
+}
+.forgot-link:hover { text-decoration: underline; }
+
+.terms-check { display: flex; align-items: center; gap: 8px; }
+.terms-check input { accent-color: #FFC107; width: 16px; height: 16px; cursor: pointer; }
+
+/* --- TOMBOL SIGN IN --- */
+.btn-signin {
+    width: 100%; padding: 15px;
+    background: linear-gradient(to bottom, #FFC107, #FFB300);
+    border: none; border-radius: 50px;
+    color: #000; font-weight: 700; font-size: 1.05rem;
+    cursor: pointer; transition: all 0.3s;
+    box-shadow: 0 10px 25px -5px rgba(255, 193, 7, 0.5);
+}
+.btn-signin:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px -5px rgba(255, 193, 7, 0.6);
+}
+
+/* --- SOCIAL & DIVIDER --- */
+.divider {
+    text-align: center; margin: 25px 0 20px;
+    font-size: 0.85rem; color: #aaa; font-weight: 500;
+}
+
+.social-login {
+    display: flex; justify-content: center; gap: 15px; margin-bottom: 25px;
+}
+.social-btn {
+    width: 50px; height: 50px;
+    border-radius: 50%; background: #fff; border: 2px solid transparent;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+    cursor: pointer; display: flex; justify-content: center; align-items: center;
+    font-size: 1.3rem; transition: all 0.3s;
+}
+.social-btn:hover {
+    transform: translateY(-4px); border-color: #FFC107;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.social-btn img { width: 24px; }
+
+.register-link { text-align: center; font-size: 0.9rem; color: #666; }
+.yellow-text { color: #FFC107; text-decoration: none; font-weight: 700; transition: 0.3s; }
+.yellow-text:hover { color: #e0a800; }
+
+/* --- GAMBAR KANAN --- */
+.hero-content {
+    text-align: center; width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    z-index: 2;
+}
+.hero-content h2 {
+    font-size: 2.2rem; color: #222; margin-bottom: -48px;
+    text-align: center; padding: 0 20px; font-weight: 800; line-height: 1.3;
+}
+.hero-img {
+    width: 617%; max-width:926px;
+    object-fit: contain; margin-bottom: -80px;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+    height: auto;
+    margin-left: -200px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Utility */
+.hidden { display: none !important; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Responsif HP */
+@media (max-width: 900px) {
+    .right-section { display: none; }
+    .left-section { width: 100%; background: #fff; }
+    .login-card { box-shadow: none; padding: 20px; }
+}

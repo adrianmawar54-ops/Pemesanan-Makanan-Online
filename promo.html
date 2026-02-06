@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promo - Food Delivery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="promo-style.css">
+</head>
+<body>
+
+    <div id="toast-container"></div>
+
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="logo-box"><i class="fa-solid fa-store"></i></div>
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-house"></i></a>
+                <a href="checkout.html" class="nav-item">
+                    <div class="icon-wrapper">
+                        <i class="fa-regular fa-bookmark"></i>
+                        <span id="cart-badge" class="badge hidden">0</span>
+                    </div>
+                </a>
+                <a href="#" class="nav-item active">
+                    <span class="promo-text-icon">PROMO</span>
+                </a>
+                <a href="settings.html" class="nav-item"><i class="fa-solid fa-gear"></i></a>
+            </nav>
+            <div class="logout-box"><a href="login.html"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></div>
+        </aside>
+
+        <main class="main-content">
+            
+            <div class="bg-gradient-overlay"></div>
+            <header class="promo-header-section">
+                <div class="promo-header-card">
+                    <div class="header-text">
+                        <h1 class="page-title">Panen Promo Hari Ini! 🥳</h1>
+                        <p class="subtitle">Klaim vouchernya, sikat diskonnya.</p>
+                    </div>
+                    <div class="flash-timer">
+                        <span>Berakhir dalam:</span>
+                        <div class="timer-digits">
+                            <span id="hours">02</span> : <span id="minutes">45</span> : <span id="seconds">30</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="content-section">
+                <div class="section-title"><i class="fa-solid fa-ticket"></i> Voucher Spesial</div>
+                <div class="voucher-grid">
+                    <div class="voucher-card blue-3d" onclick="copyCode('HEMAT10K')">
+                        <div class="v-icon"><i class="fa-solid fa-utensils"></i></div>
+                        <div class="v-info">
+                            <small>Potongan Rp 10.000</small>
+                            <h3>HEMAT10K</h3>
+                            <button>Salin</button>
+                        </div>
+                    </div>
+                    <div class="voucher-card gold-3d" onclick="copyCode('SUPER25')">
+                        <div class="v-icon"><i class="fa-solid fa-crown"></i></div>
+                        <div class="v-info">
+                            <small>Diskon Sultan Rp 25rb</small>
+                            <h3>SUPER25</h3>
+                            <button>Salin</button>
+                        </div>
+                    </div>
+                    <div class="voucher-card red-3d" onclick="copyCode('GAJIAN50')">
+                        <div class="v-icon"><i class="fa-solid fa-money-bill-wave"></i></div>
+                        <div class="v-info">
+                            <small>Promo Gajian Rp 50rb</small>
+                            <h3>GAJIAN50</h3>
+                            <button>Salin</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="thick-divider"></div>
+
+            <section class="content-section">
+                <div class="flex-between">
+                    <div class="section-title"><i class="fa-solid fa-fire"></i> Menu Lagi Diskon</div>
+                    <div class="filter-tabs">
+                        <button class="tab-btn active" onclick="filterPromo('all')">Semua</button>
+                        <button class="tab-btn" onclick="filterPromo('gajian')">Gajian</button>
+                        <button class="tab-btn" onclick="filterPromo('okb')">OKB</button>
+                        <button class="tab-btn" onclick="filterPromo('plus')">PLUS</button>
+                    </div>
+                </div>
+                
+                <div class="food-grid" id="promo-food-grid"></div>
+            </section>
+
+            <div class="thick-divider"></div>
+
+            <section class="content-section">
+                <div class="section-title"><i class="fa-solid fa-bullhorn"></i> Info Spesial</div>
+                <div class="banner-grid" id="promo-banner-grid"></div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="promo-script.js"></script>
+</body>
+</html>

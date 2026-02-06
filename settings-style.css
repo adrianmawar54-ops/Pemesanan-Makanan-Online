@@ -1,0 +1,140 @@
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+body { background-color: #f8f9fd; height: 100vh; overflow: hidden; }
+
+/* VARIABEL WARNA */
+:root {
+    --primary-yellow: #FFC107;
+    --sidebar-bg: #F9F9F9; /* Sidebar Kiri Utama */
+    --bg-main: #f8f9fd;
+    --bg-card: #EBEBEB; 
+    --text-color: #333;
+    --active-sub: #FFF8E1; 
+}
+
+/* DARK MODE */
+body.dark-mode {
+    --bg-main: #1e1e1e;
+    --bg-card: #2d2d2d;
+    --text-color: #fff;
+    --sidebar-bg: #121212;
+    --active-sub: #333;
+}
+
+.layout-container { display: flex; height: 100%; width: 100%; }
+
+/* --- 1. SIDEBAR UTAMA (STYLE BARU SESUAI DASHBOARD) --- */
+.sidebar {
+    width: 90px; background: var(--sidebar-bg); 
+    display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+    padding: 30px 0; border-right: 1px solid #eee; z-index: 50;
+}
+.logo-box {
+    width: 50px; height: 50px; background: #FFE082; color: #D32F2F;
+    border-radius: 14px; font-size: 1.5rem; display: flex; justify-content: center; align-items: center; margin-bottom: 20px;
+}
+.nav-menu { display: flex; flex-direction: column; gap: 30px; width: 100%; align-items: center; }
+.nav-item {
+    color: #CCC; font-size: 1.2rem; width: 50px; height: 50px;
+    display: flex; justify-content: center; align-items: center;
+    border-radius: 14px; transition: 0.3s; position: relative;
+    text-decoration: none;
+}
+.nav-item:hover, .nav-item.active {
+    background-color: var(--primary-yellow); color: #FFF;
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+}
+.badge {
+    position: absolute; top: -2px; right: -2px;
+    background: #D32F2F; color: white; font-size: 0.6rem; width: 16px; height: 16px;
+    border-radius: 50%; display: flex; justify-content: center; align-items: center;
+    font-weight: 700; border: 2px solid #fff;
+}
+.badge.hidden { display: none; }
+.logout-box a { color: #CCC; font-size: 1.2rem; }
+
+/* --- 2. SUB-SIDEBAR (TENGAH) --- */
+.sub-sidebar {
+    width: 300px; background: #FFF; height: 100%; /* Background putih agar beda dikit */
+    padding: 40px 20px; display: flex; flex-direction: column;
+    border-right: 1px solid #eee;
+}
+body.dark-mode .sub-sidebar { background: #1a1a1a; border-right: 1px solid #333; }
+
+.sub-sidebar h2 { color: #FFC107; margin-bottom: 30px; font-size: 1.5rem; }
+
+.sub-menu { display: flex; flex-direction: column; gap: 10px; }
+.sub-item {
+    display: flex; align-items: flex-start; gap: 15px;
+    background: transparent; border: none; padding: 15px;
+    text-align: left; cursor: pointer; border-radius: 10px; transition: 0.3s;
+    color: var(--text-color);
+}
+.sub-item i { font-size: 1.2rem; margin-top: 3px; color: #888; }
+.sub-item span { display: block; font-weight: 600; font-size: 0.95rem; }
+.sub-item small { display: block; font-size: 0.75rem; color: #aaa; margin-top: 2px; }
+
+/* State Aktif pada Sub-Menu */
+.sub-item.active {
+    background-color: var(--active-sub); 
+    border-left: 4px solid #FFC107;
+}
+.sub-item.active i { color: #FFC107; }
+
+/* --- 3. KONTEN UTAMA (KANAN) --- */
+.main-content {
+    flex: 1; padding: 40px 60px; overflow-y: auto;
+    background: var(--bg-main);
+}
+
+.tab-content { display: none; animation: fadeIn 0.4s; }
+.tab-content.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+header h1 { font-size: 1.5rem; color: var(--text-color); margin-bottom: 30px; font-weight: 600; }
+
+.setting-card {
+    background: var(--bg-card); 
+    padding: 20px 25px; border-radius: 15px;
+    margin-bottom: 20px; border: 1px solid #ddd;
+}
+body.dark-mode .setting-card { border: 1px solid #444; }
+
+.setting-card h3 { font-size: 1rem; margin-bottom: 15px; color: var(--text-color); }
+
+/* Form Elements */
+.radio-group { display: flex; gap: 30px; align-items: center; }
+.radio-label, .checkbox-label {
+    display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.9rem; color: #555;
+}
+body.dark-mode .radio-label, body.dark-mode .checkbox-label { color: #ccc; }
+
+.form-select, .form-input {
+    width: 100%; padding: 12px; border: none; border-radius: 8px;
+    background: #fff; color: #333; outline: none; font-size: 0.9rem;
+}
+.form-input { margin-bottom: 10px; border: 1px solid #ccc; }
+
+.save-btn {
+    background: #FFC107; border: none; padding: 10px 20px; border-radius: 8px;
+    font-weight: bold; cursor: pointer; margin-top: 10px; color: #222;
+}
+
+/* Toggle Switch */
+.switch-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; color: var(--text-color); }
+.divider { border: 0; border-top: 1px solid #ccc; margin: 10px 0; }
+
+.switch { position: relative; display: inline-block; width: 50px; height: 24px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc; transition: .4s; border-radius: 34px;
+}
+.slider:before {
+    position: absolute; content: ""; height: 16px; width: 16px; left: 4px; bottom: 4px;
+    background-color: white; transition: .4s; border-radius: 50%;
+}
+input:checked + .slider { background-color: #FFC107; }
+input:checked + .slider:before { transform: translateX(26px); }
+
+input[type="radio"], input[type="checkbox"] { accent-color: #888; transform: scale(1.2); }

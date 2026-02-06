@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Food Delivery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="dashboard-style.css">
+</head>
+<body>
+
+    <div id="toast-container"></div>
+
+    <div id="floating-cart-btn" class="floating-cart hidden" onclick="window.location.href='checkout.html'">
+        <div class="cart-info">
+            <div class="count-bubble" id="float-qty">0</div>
+            <span class="float-text">Item di Keranjang</span>
+        </div>
+        <div class="cart-price">
+            <span id="float-total">Rp 0</span>
+            <i class="fa-solid fa-arrow-right"></i>
+        </div>
+    </div>
+
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="logo-box"><i class="fa-solid fa-store"></i></div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" onclick="setActiveNav(this)"><i class="fa-solid fa-house"></i></a>
+                <a href="checkout.html" class="nav-item">
+                    <div class="icon-wrapper">
+                        <i class="fa-regular fa-bookmark"></i>
+                        <span id="cart-badge" class="badge hidden">0</span>
+                    </div>
+                </a>
+                <a href="promo.html" class="nav-item"><i class="fa-regular fa-compass"></i></a>
+                <a href="settings.html" class="nav-item"><i class="fa-solid fa-gear"></i></a>
+            </nav>
+            <div class="logout-box"><a href="login.html"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></div>
+        </aside>
+
+        <main class="main-content">
+            
+            <div class="bg-gradient-overlay"></div>
+            <header>
+                <div class="search-container">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Mau makan apa hari ini, Adrian?" onkeyup="searchFood()">
+                </div>
+                
+                <div class="header-actions">
+                    <div class="action-wrapper">
+                        <button class="icon-btn" onclick="toggleDropdown('notifDropdown')">
+                            <i class="fa-regular fa-bell"></i>
+                            <span class="dot"></span>
+                        </button>
+                        <div id="notifDropdown" class="dropdown-menu hidden">
+                            <div class="dropdown-header">Notifikasi</div>
+                            <div class="notif-item unread">
+                                <div class="notif-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                                <div><p><b>Pesanan Sedang Diantar</b></p><small>Paketmu sudah dekat!</small></div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-percent"></i></div>
+                                <div><p><b>Promo Gajian 50%</b></p><small>Berlaku sampai besok.</small></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-wrapper">
+                        <div class="profile-pic" onclick="toggleDropdown('profileDropdown')">
+                            <i class="fa-regular fa-user"></i>
+                        </div>
+                        <div id="profileDropdown" class="dropdown-menu profile-menu hidden">
+                            <div class="profile-header">
+                                <p>Halo, <b>Adrian</b></p>
+                                <small>Member Gold</small>
+                            </div>
+                            <hr>
+                            <a href="settings.html" class="menu-link"><i class="fa-solid fa-user-gear"></i> Edit Profile</a>
+                            <a href="checkout.html" class="menu-link"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat</a>
+                            <a href="#" onclick="handleLogout()" class="menu-link logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="hero-section">
+                <div class="carousel-track" id="bannerTrack">
+                    <div class="hero-slide dark-mode">
+                        <div class="slide-content">
+                            <span class="badge-pill">🔥 Hot Promo</span>
+                            <h1>Burger Weekend <br>Diskon 50%</h1>
+                            <p>Nikmati daging sapi wagyu premium dengan keju meleleh.</p>
+                            <button class="btn-primary" onclick="window.location.href='promo.html'">Pesan Sekarang</button>
+                        </div>
+                        <img src="https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg" class="hero-img">
+                    </div>
+                    <div class="hero-slide orange-mode">
+                        <div class="slide-content">
+                            <span class="badge-pill white">🇮🇹 Italian Taste</span>
+                            <h1>Pepperoni Pizza <br>Cheesy Crust</h1>
+                            <p>Beli ukuran Large, gratis minuman segar.</p>
+                            <button class="btn-white" onclick="filterCategory(document.querySelector('.cat-pill'), 'all')">Lihat Menu</button>
+                        </div>
+                        <img src="https://img.freepik.com/free-photo/pepperoni-pizza-with-sausages-cheese-dark-wooden-table_220768-9277.jpg" class="hero-img">
+                    </div>
+                    <div class="hero-slide green-mode">
+                        <div class="slide-content">
+                            <span class="badge-pill">🥗 Healthy Choice</span>
+                            <h1>Fresh Salad <br>Bowl</h1>
+                            <p>Mulai hidup sehatmu dengan sayuran organik segar.</p>
+                            <button class="btn-primary" onclick="filterCategory(document.querySelector('.cat-pill'), 'healthy')">Coba Yuk</button>
+                        </div>
+                        <img src="https://img.freepik.com/free-photo/fresh-salad-with-vegetables-tomatoes-red-onions-lettuce-quail-eggs-healthy-food-diet-concept-vegetarian-food_2829-20232.jpg" class="hero-img">
+                    </div>
+                </div>
+                <div class="dots-wrapper">
+                    <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+                </div>
+            </section>
+
+            <section class="category-list">
+                <div class="cat-item active" onclick="filterCategory(this, 'all')">
+                    <div class="cat-icon"><i class="fa-solid fa-border-all"></i></div><span>All Menu</span>
+                </div>
+                <div class="cat-item" onclick="filterCategory(this, 'near_me')">
+                    <div class="cat-icon"><i class="fa-solid fa-location-dot"></i></div><span>Near Me</span>
+                </div>
+                <div class="cat-item" onclick="filterCategory(this, 'popular')">
+                    <div class="cat-icon"><i class="fa-solid fa-fire"></i></div><span>Popular</span>
+                </div>
+                <div class="cat-item" onclick="filterCategory(this, 'discount')">
+                    <div class="cat-icon"><i class="fa-solid fa-ticket"></i></div><span>Discount</span>
+                </div>
+                <div class="cat-item" onclick="filterCategory(this, '24hours')">
+                    <div class="cat-icon"><i class="fa-solid fa-clock"></i></div><span>24 Hours</span>
+                </div>
+                <div class="cat-item" onclick="filterCategory(this, 'quick_delivery')">
+                    <div class="cat-icon"><i class="fa-solid fa-truck-fast"></i></div><span>Fast Deliv..</span>
+                </div>
+            </section>
+
+            <div class="thick-divider"></div>
+
+            <section class="text-tabs">
+                <h3 class="tab-link active" onclick="filterTab(this, 'rekomendasi')">Rekomendasi</h3>
+                <h3 class="tab-link" onclick="filterTab(this, 'terlaris')">Terlaris</h3>
+                <h3 class="tab-link" onclick="filterTab(this, 'rating')">Top Rating</h3>
+                <h3 class="tab-link" onclick="filterTab(this, 'panas')">Panas</h3>
+                <h3 class="tab-link" onclick="filterTab(this, 'dingin')">Dingin</h3>
+                <h3 class="tab-link" onclick="filterTab(this, 'dessert')">Dessert</h3>
+            </section>
+
+            <section id="foodGrid" class="food-grid"></section>
+
+        </main>
+    </div>
+
+    <script src="dashboard-script.js"></script>
+</body>
+</html>
