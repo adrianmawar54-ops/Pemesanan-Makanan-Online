@@ -1,9 +1,9 @@
 // DATA MAKANAN PROMO
 const promoFoodData = [
-    { id: 1, name: "Paket Panas 1", price: 25000, oldPrice: 40000, discount: "40%", category: "gajian", img: "https://img.freepik.com/free-photo/crispy-fried-chicken-plate_140725-638.jpg" },
-    { id: 2, name: "Burger Party", price: 30000, oldPrice: 50000, discount: "40%", category: "okb", img: "https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg" },
-    { id: 3, name: "Pizza Lovers", price: 60000, oldPrice: 100000, discount: "40%", category: "plus", img: "https://img.freepik.com/free-photo/pepperoni-pizza-with-sausages-cheese-dark-wooden-table_220768-9277.jpg" },
-    { id: 4, name: "Iced Coffee Duo", price: 18000, oldPrice: 30000, discount: "B1G1", category: "gajian", img: "https://img.freepik.com/free-photo/iced-coffee-tall-glass_144627-32431.jpg" },
+    { id: 1, name: "Paket Panas 1", price: 25000, oldPrice: 40000, discount: "40%", category: "gajian", img: "assets/fried_chicken.jpg" },
+    { id: 2, name: "Burger Party", price: 30000, oldPrice: 50000, discount: "40%", category: "okb", img: "assets/burger.jpg" },
+    { id: 3, name: "Pizza Lovers", price: 60000, oldPrice: 100000, discount: "40%", category: "plus", img: "assets/pizza.jpg" },
+    { id: 4, name: "Iced Coffee Duo", price: 18000, oldPrice: 30000, discount: "B1G1", category: "gajian", img: "assets/ice coffe.jpg" },
     { id: 5, name: "Donut Box", price: 40000, oldPrice: 60000, discount: "30%", category: "anniv", img: "assets/donuts.jpg" }
 ];
 

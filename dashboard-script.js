@@ -1,17 +1,17 @@
 // --- DATABASE MAKANAN LENGKAP ---
 const foodData = [
-    { id: 1, name: "Double Beef Burger", price: 45000, category: "popular", tab: "terlaris", rating: 4.8, time: "20m", cals: "450", img: "https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg", tags: ["halal"] },
-    { id: 2, name: "Pepperoni Pizza", price: 85000, category: "popular", tab: "terlaris", rating: 4.9, time: "35m", cals: "800", img: "https://img.freepik.com/free-photo/pepperoni-pizza-with-sausages-cheese-dark-wooden-table_220768-9277.jpg", tags: ["halal"] },
+    { id: 1, name: "Double Beef Burger", price: 45000, category: "popular", tab: "terlaris", rating: 4.8, time: "20m", cals: "450", img: "assets/burger.jpg", tags: ["halal"] },
+    { id: 2, name: "Pepperoni Pizza", price: 85000, category: "popular", tab: "terlaris", rating: 4.9, time: "35m", cals: "800", img: "assets/pizza.jpg", tags: ["halal"] },
     { id: 3, name: "Nasi Goreng Spesial", price: 25000, category: "near_me", tab: "panas", rating: 4.7, time: "15m", cals: "320", img: "assets/nasgor.jpg", tags: ["halal"] },
     { id: 4, name: "Sate Ayam Madura", price: 30000, category: "near_me", tab: "panas", rating: 4.6, time: "20m", cals: "300", img: "assets/sate madura.jpg", tags: ["halal"] },
     { id: 5, name: "Chocolate Sundae", price: 15000, category: "discount", tab: "dessert", rating: 4.9, time: "10m", cals: "210", img: "assets/sundae.jpg", tags: ["halal", "vegetarian"] },
     { id: 6, name: "Glazed Donuts Box", price: 50000, category: "discount", tab: "dessert", rating: 4.5, time: "25m", cals: "500", img: "assets/donuts.jpg", tags: ["halal", "vegetarian"] },
     { id: 7, name: "Spicy Ramen Bowl", price: 42000, category: "24hours", tab: "panas", rating: 4.8, time: "25m", cals: "420", img: "assets/ramen.jpg", tags: ["halal"] },
-    { id: 8, name: "Iced Coffee Latte", price: 22000, category: "24hours", tab: "dingin", rating: 4.6, time: "10m", cals: "120", img: "https://img.freepik.com/free-photo/iced-coffee-tall-glass_144627-32431.jpg", tags: ["halal", "vegetarian"] },
-    { id: 9, name: "Healthy Salad Bowl", price: 35000, category: "quick_delivery", tab: "rekomendasi", rating: 4.7, time: "12m", cals: "150", img: "https://img.freepik.com/free-photo/fresh-salad-with-vegetables-tomatoes-red-onions-lettuce-quail-eggs-healthy-food-diet-concept-vegetarian-food_2829-20232.jpg", tags: ["halal", "vegetarian"] },
-    { id: 10, name: "Crispy Fried Chicken", price: 95000, category: "quick_delivery", tab: "terlaris", rating: 4.9, time: "30m", cals: "900", img: "https://img.freepik.com/free-photo/crispy-fried-chicken-plate_140725-638.jpg", tags: ["halal"] },
+    { id: 8, name: "Iced Coffee Latte", price: 22000, category: "24hours", tab: "dingin", rating: 4.6, time: "10m", cals: "120", img: "assets/ice coffe.jpg", tags: ["halal", "vegetarian"] },
+    { id: 9, name: "Healthy Salad Bowl", price: 35000, category: "quick_delivery", tab: "rekomendasi", rating: 4.7, time: "12m", cals: "150", img: "assets/salad.jpg", tags: ["halal", "vegetarian"] },
+    { id: 10, name: "Crispy Fried Chicken", price: 95000, category: "quick_delivery", tab: "terlaris", rating: 4.9, time: "30m", cals: "900", img: "assets/fried_chicken.jpg", tags: ["halal"] },
     { id: 11, name: "Fresh Orange Juice", price: 18000, category: "all", tab: "dingin", rating: 4.5, time: "8m", cals: "90", img: "assets/orange.jpg", tags: ["halal", "vegetarian"] },
-    { id: 12, name: "Premium Beef Steak", price: 135000, category: "popular", tab: "rating", rating: 5.0, time: "40m", cals: "600", img: "https://img.freepik.com/free-photo/grilled-beef-steak-dark-wooden-surface_1150-44344.jpg", tags: ["halal"] }
+    { id: 12, name: "Premium Beef Steak", price: 135000, category: "popular", tab: "rating", rating: 5.0, time: "40m", cals: "600", img: "assets/steak.jpg", tags: ["halal"] }
 ];
 
 // STATE Variables
