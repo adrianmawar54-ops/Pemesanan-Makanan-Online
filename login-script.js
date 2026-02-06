@@ -113,6 +113,7 @@ function validateForm(email, password, confirmPassword = null, terms = null) {
 }
 
 // 4. MAIN HANDLER (Submit Form)
+// 4. MAIN HANDLER (Submit Form) - UPDATE UNTUK SISTEM MEMBER
 function handleAuth(event) {
     event.preventDefault();
 
@@ -123,39 +124,56 @@ function handleAuth(event) {
     // Ambil data tambahan jika Register
     let confirmPass = null;
     let termsChecked = null;
+    let fullname = "";
+
     if (isRegisterMode) {
         confirmPass = document.getElementById('confirm-password').value;
         termsChecked = document.getElementById('terms-condition').checked;
+        fullname = document.getElementById('fullname').value;
+    } else {
+        // Jika Login, anggap nama usernya 'Adrian' (Hardcode dulu untuk simulasi)
+        // Nanti bisa diambil dari database jika sudah ada backend
+        fullname = "Adrian"; 
     }
 
     // 1. Lakukan Validasi
     const validation = validateForm(email, password, confirmPass, termsChecked);
     if (!validation.valid) {
-        alert(validation.msg); // Ganti dengan Toast/Alert UI jika mau lebih bagus
+        alert(validation.msg); 
         return;
     }
 
-    // 2. Loading State (UX Standar)
+    // 2. Loading State
     const originalText = btn.innerText;
     btn.innerText = "Processing...";
     btn.style.opacity = "0.7";
     btn.disabled = true;
     btn.style.cursor = "not-allowed";
 
-    // 3. Simulasi API Call (Delay 1.5 detik)
+    // 3. Simulasi Proses (Delay 1.5 detik)
     setTimeout(() => {
         if (isRegisterMode) {
-            // Sukses Register
-            const name = document.getElementById('fullname').value;
-            alert(`Registrasi Berhasil!\nSelamat datang, ${name}. Silakan login dengan akun barumu.`);
-            toggleMode(); // Auto switch ke login
+            // --- SKENARIO REGISTER ---
+            // Simpan data user baru (Simulasi)
+            localStorage.setItem('userRole', 'member'); // Set status jadi MEMBER
+            localStorage.setItem('username', fullname); // Simpan nama asli inputan
+            
+            alert(`Registrasi Berhasil!\nSelamat datang, ${fullname}. Akun Anda telah aktif.`);
+            
+            // Langsung masuk ke Dashboard setelah register (UX modern)
+            window.location.href = "dashboard.html"; 
+
         } else {
-            // Sukses Login
+            // --- SKENARIO LOGIN ---
+            // Simpan status login
+            localStorage.setItem('userRole', 'member'); // Set status jadi MEMBER
+            localStorage.setItem('username', fullname); // Simpan nama
+            
             alert(`Login Berhasil! Mengalihkan ke Dashboard...`);
             window.location.href = "dashboard.html"; 
         }
 
-        // Reset Button
+        // Reset Button (Jaga-jaga jika redirect gagal)
         btn.innerText = originalText;
         btn.style.opacity = "1";
         btn.disabled = false;

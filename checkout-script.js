@@ -233,4 +233,61 @@ function updateBadge() {
     badge.classList.toggle('hidden', totalQty === 0);
 }
 
-document.addEventListener("DOMContentLoaded", loadCart);
+// FILE: checkout.js
+
+// --- 1. SAAT HALAMAN DIMUAT ---
+document.addEventListener("DOMContentLoaded", () => {
+    loadCart();      // Muat keranjang
+    checkUserIdentity(); // Cek siapa yang datang (Tamu/Member?)
+});
+
+function checkUserIdentity() {
+    // Ambil data dari localStorage (yang diset di halaman login tadi)
+    const role = localStorage.getItem('userRole') || 'guest'; 
+    const name = localStorage.getItem('userName') || 'Tamu';
+
+    // Update Teks Sapaan di Pojok Kanan Atas (Kalau ada elemen id="user-greeting")
+    const greetingElement = document.getElementById('user-greeting');
+    if (greetingElement) {
+        greetingElement.innerText = "Halo, " + name;
+    }
+}
+
+// --- 2. SAAT TOMBOL "BAYAR" DI KERANJANG DIKLIK ---
+function openPaymentModal() {
+    if (cart.length === 0) {
+        alert("Keranjang kosong, pesan dulu yuk!");
+        return;
+    }
+
+    // CEK STATUS: Apakah dia Guest?
+    const userRole = localStorage.getItem('userRole');
+
+    if (userRole !== 'member') {
+        // JIKA GUEST: Tolak dan suruh Login
+        let confirmLogin = confirm("Maaf, kamu masih mode Tamu.\nSilakan Login/Buat Akun untuk melanjutkan pembayaran.\n\nKe halaman Login sekarang?");
+        if (confirmLogin) {
+            window.location.href = "login.html"; // Lempar ke Login
+        }
+    } else {
+        // JIKA MEMBER: Buka Modal Pembayaran
+        document.getElementById('paymentModal').classList.remove('hidden');
+    }
+}
+
+// --- 3. SAAT TOMBOL "BAYAR SEKARANG" (KUNING) DIKLIK ---
+function processFinalPayment() {
+    // Tutup Modal Pembayaran
+    document.getElementById('paymentModal').classList.add('hidden');
+    
+    // Buka Layar Tracking (Driver OTW)
+    const trackingScreen = document.getElementById('trackingScreen');
+    if(trackingScreen) {
+        trackingScreen.classList.remove('hidden');
+        startTrackingAnimation(); // Panggil fungsi animasi driver yang sudah ada
+    } else {
+        alert("Pembayaran Berhasil! Pesanan sedang diproses.");
+        // Redirect ke dashboard atau reset cart jika tidak ada layar tracking
+        finishAndRedirect();
+    }
+}

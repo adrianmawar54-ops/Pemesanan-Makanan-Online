@@ -3,91 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Delivery Food</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Welcome to Foodies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="index-style.css">
+    <style>
+        /* CSS KHUSUS LANDING PAGE */
+        :root { --primary: #FFC107; --dark: #222; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background: var(--dark);
+            height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; position: relative;
+        }
+
+        /* Background Image */
+        .bg-image {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            /* Ganti URL ini dengan gambar makanan hd yang menarik */
+            background: url('https://img.freepik.com/free-photo/top-view-table-full-delicious-food-composition_23-2149141353.jpg') no-repeat center center/cover;
+            opacity: 0.4; z-index: 0;
+        }
+        .overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, #000000 10%, transparent 100%);
+            z-index: 1;
+        }
+
+        /* Konten Utama */
+        .landing-content {
+            position: relative; z-index: 10; text-align: center; color: white;
+            max-width: 600px; padding: 20px; animation: fadeInUp 1s ease-out;
+        }
+
+        .logo-box {
+            font-size: 3rem; color: var(--primary); margin-bottom: 20px;
+            text-shadow: 0 5px 15px rgba(255, 193, 7, 0.5);
+        }
+
+        h1 { font-size: 2.8rem; line-height: 1.2; margin-bottom: 15px; font-weight: 800; }
+        p { font-size: 1rem; opacity: 0.8; margin-bottom: 40px; line-height: 1.6; }
+
+        /* Tombol Pilihan */
+        .btn-group { display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 350px; margin: 0 auto; }
+        
+        .btn {
+            padding: 18px; border-radius: 50px; font-size: 1rem; font-weight: 700;
+            cursor: pointer; transition: 0.3s; text-decoration: none; border: none;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+
+        /* Tombol Masuk Akun */
+        .btn-primary {
+            background: var(--primary); color: var(--dark);
+            box-shadow: 0 10px 20px rgba(255, 193, 7, 0.3);
+        }
+        .btn-primary:hover { transform: translateY(-3px); background: #fff; }
+
+        /* Tombol Tamu */
+        .btn-outline {
+            background: rgba(255,255,255,0.1); color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(5px);
+        }
+        .btn-outline:hover { background: white; color: var(--dark); }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <div class="left-section">
-            <div class="login-card">
-                
-                <h1 id="pageTitle">Login</h1>
-                <p id="pageSubtitle" class="subtitle">Please enter your details to sign in.</p>
-                
-                <form id="authForm" onsubmit="handleAuth(event)">
-                    
-                    <div class="input-group hidden" id="group-fullname">
-                        <label for="fullname">Full Name</label>
-                        <input type="text" id="fullname" placeholder="Ex: Adrian Siburian">
-                    </div>
+    <div class="bg-image"></div>
+    <div class="overlay"></div>
 
-                    <div class="input-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="username@gmail.com" required>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="password">Password</label>
-                        <div class="password-wrapper">
-                            <input type="password" id="password" placeholder="Password" required>
-                            <i class="fa-regular fa-eye-slash toggle-pass" onclick="togglePassword('password', this)"></i>
-                        </div>
-                    </div>
-
-                    <div class="input-group hidden" id="group-confirm-pass">
-                        <label for="confirm-password">Confirm Password</label>
-                        <div class="password-wrapper">
-                            <input type="password" id="confirm-password" placeholder="Re-type password">
-                            <i class="fa-regular fa-eye-slash toggle-pass" onclick="togglePassword('confirm-password', this)"></i>
-                        </div>
-                    </div>
-
-                    <div class="form-actions">
-                        <div class="terms-check hidden" id="group-terms">
-                            <input type="checkbox" id="terms-condition">
-                            <label for="terms-condition">Agree to terms</label>
-                        </div>
-                        <a href="#" class="forgot-link" id="link-forgot" onclick="handleForgotPassword()">Forgot Password?</a>
-                    </div>
-
-                    <button type="submit" class="btn-signin" id="submitBtn">Sign in</button>
-                </form>
-
-                <div class="divider">
-                    <span>Or Continue With</span>
-                </div>
-
-                <div class="social-login">
-                    <button class="social-btn" onclick="socialLogin('Google')">
-                        <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google">
-                    </button>
-                    <button class="social-btn" onclick="socialLogin('GitHub')">
-                        <i class="fa-brands fa-github"></i>
-                    </button>
-                    <button class="social-btn" onclick="socialLogin('Facebook')">
-                        <i class="fa-brands fa-facebook" style="color: #1877F2;"></i>
-                    </button>
-                </div>
-
-                <div class="register-link">
-                    <span id="footerText">Don't have an account yet?</span> 
-                    <a href="#" class="yellow-text" id="toggleBtn" onclick="toggleMode()">Register for free</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="right-section">
-            <div class="hero-content">
-                <h2 id="heroTitle"><ln>Nikmati Makanan Lezat<br>Tanpa Harus Keluar Rumah</h2>
-                
-                <img src="assets/kurir.png" alt="Delivery Courier" class="hero-img">
-            </div>
+    <div class="landing-content">
+        <div class="logo-box"><i class="fa-solid fa-burger"></i> Foodies</div>
+        <h1>Lapar? <br><span style="color:var(--primary)">Jangan Tunggu Nanti!</span></h1>
+        <p>Nikmati ribuan menu lezat dari restoran terbaik di sekitarmu. Pengiriman cepat, rasa terjamin, dan banyak promo menanti.</p>
+        
+        <div class="btn-group">
+            <a href="login.html" class="btn btn-primary">
+                <i class="fa-solid fa-user"></i> Masuk / Daftar Akun
+            </a>
+            
+            <button onclick="enterAsGuest()" class="btn btn-outline">
+                <i class="fa-solid fa-rocket"></i> Coba Tanpa Akun
+            </button>
         </div>
     </div>
 
-    <script src="index-script.js"></script>
+    <script>
+        function enterAsGuest() {
+            // Set status user sebagai 'guest'
+            localStorage.setItem('userRole', 'guest');
+            // Hapus data login lama jika ada
+            localStorage.removeItem('username'); 
+            
+            // Masuk ke Dashboard
+            window.location.href = 'dashboard.html';
+        }
+    </script>
 </body>
 </html>

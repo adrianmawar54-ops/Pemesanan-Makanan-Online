@@ -211,5 +211,5 @@ const formatRupiah = (num) => new Intl.NumberFormat('id-ID', { style: 'currency'
 function setActiveNav(el) { document.querySelectorAll('.nav-item').forEach(e => e.classList.remove('active')); el.classList.add('active'); }
 
 function handleLogout() {
-    if(confirm("Yakin ingin logout?")) window.location.href = "login.html";
+    if(confirm("Yakin ingin logout?")) window.location.href = "index.html";
 }

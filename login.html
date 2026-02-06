@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Delivery Food</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="login-style.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="left-section">
+            <div class="login-card">
+                
+                <h1 id="pageTitle">Login</h1>
+                <p id="pageSubtitle" class="subtitle">Please enter your details to sign in.</p>
+                
+                <form id="authForm" onsubmit="handleAuth(event)">
+                    
+                    <div class="input-group hidden" id="group-fullname">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" placeholder="Ex: Adrian Siburian">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="username@gmail.com" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="password" placeholder="Password" required>
+                            <i class="fa-regular fa-eye-slash toggle-pass" onclick="togglePassword('password', this)"></i>
+                        </div>
+                    </div>
+
+                    <div class="input-group hidden" id="group-confirm-pass">
+                        <label for="confirm-password">Confirm Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="confirm-password" placeholder="Re-type password">
+                            <i class="fa-regular fa-eye-slash toggle-pass" onclick="togglePassword('confirm-password', this)"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <div class="terms-check hidden" id="group-terms">
+                            <input type="checkbox" id="terms-condition">
+                            <label for="terms-condition">Agree to terms</label>
+                        </div>
+                        <a href="#" class="forgot-link" id="link-forgot" onclick="handleForgotPassword()">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="btn-signin" id="submitBtn">Sign in</button>
+                </form>
+
+                <div class="divider">
+                    <span>Or Continue With</span>
+                </div>
+
+                <div class="social-login">
+                    <button class="social-btn" onclick="socialLogin('Google')">
+                        <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google">
+                    </button>
+                    <button class="social-btn" onclick="socialLogin('GitHub')">
+                        <i class="fa-brands fa-github"></i>
+                    </button>
+                    <button class="social-btn" onclick="socialLogin('Facebook')">
+                        <i class="fa-brands fa-facebook" style="color: #1877F2;"></i>
+                    </button>
+                </div>
+
+                <div class="register-link">
+                    <span id="footerText">Don't have an account yet?</span> 
+                    <a href="#" class="yellow-text" id="toggleBtn" onclick="toggleMode()">Register for free</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-section">
+            <div class="hero-content">
+                <h2 id="heroTitle"><ln>Nikmati Makanan Lezat<br>Tanpa Harus Keluar Rumah</h2>
+                
+                <img src="assets/kurir.png" alt="Delivery Courier" class="hero-img">
+            </div>
+        </div>
+    </div>
+
+    <script src="login-script.js"></script>
+</body>
+</html>
